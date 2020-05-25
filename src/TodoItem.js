@@ -8,11 +8,17 @@ function TodoItem(props) {
         {
             return <div className="list" key={item.key}>
                 <p>
-                <input 
+                <FontAwesomeIcon  className="faicons" icon='check' onClick = {()=> props.completeItem(item.key)} />
+                <input   
+                    style={{
+                        textDecoration: item.isComplete ?"line-through" : ""
+                    }}
                     type="text" 
                     id={item.key} 
                     value={item.text}
-                    onChange = {(e) => props.updateItem(e.target.value, item.key) }/>
+                    onChange = {(e) => props.updateItem(e.target.value, item.key) }
+                  
+                    />
                 <span> 
                 <FontAwesomeIcon className="faicons" icon='trash' onClick = {()=>props.deleteItem(item.key)}/>
                 </span>

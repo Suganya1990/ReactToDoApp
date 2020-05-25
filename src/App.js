@@ -1,10 +1,12 @@
  import React from "react"
  import "./App.css"
+ import "./TodoItem.css" 
 import TodoItem from "./TodoItem"
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faCheck } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTrash);
+
+library.add(faTrash, faCheck);
 
  class App extends React.Component{
 
@@ -21,6 +23,7 @@ library.add(faTrash);
         this.addItem = this.addItem.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
         this.updateItem= this.updateItem.bind(this)
+        this.completeItem = this.completeItem.bind(this)
         
     }
     handleInput(e){
@@ -51,7 +54,8 @@ library.add(faTrash);
               
                currentItem: {
                    text: '',
-                   key: ''
+                   key: '',
+                   isComplete: false
                }
            })
           
@@ -67,6 +71,23 @@ library.add(faTrash);
         this.setState({
             items: items
         })
+    }
+
+    completeItem(key){
+        const items = this.state.items
+
+        items.map(item =>  {
+            if(item.key===key)
+            {
+                item.isComplete = !item.isComplete
+             
+            }
+        })
+
+        this.setState({
+            items: items
+        })
+
     }
     render(){
         return(
@@ -84,6 +105,7 @@ library.add(faTrash);
                     <TodoItem items= {this.state.items}
                         deleteItem ={this.deleteItem} 
                         updateItem = {this.updateItem}
+                        completeItem = {this.completeItem}
                     />
                  </header>
             </div>
