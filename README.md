@@ -1,5 +1,11 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project was based on the following Tutotiral:
+  https://www.youtube.com/watch?v=N8kYlimhuLw&t=1080s
+  
+Added my own function 'completeItem'
+
+
 ## Available Scripts
 
 In the project directory, you can run:
