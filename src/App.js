@@ -1,6 +1,11 @@
  import React from "react"
  import "./App.css"
 import TodoItem from "./TodoItem"
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faTrash);
+
  class App extends React.Component{
 
     constructor(props){
@@ -14,6 +19,8 @@ import TodoItem from "./TodoItem"
         }
         this.handleInput = this.handleInput.bind(this)
         this.addItem = this.addItem.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
+        this.updateItem= this.updateItem.bind(this)
         
     }
     handleInput(e){
@@ -25,6 +32,14 @@ import TodoItem from "./TodoItem"
         })
     }
 
+    deleteItem(key){
+        console.log("Function Delete Item ")
+        const filteredItems = this.state.items.filter(item => item.key!== key)
+        this.setState({
+            items: filteredItems
+        })
+
+    }
 
     addItem(e){
         e.preventDefault();
@@ -43,6 +58,16 @@ import TodoItem from "./TodoItem"
         }
     }
 
+    updateItem(text, key){
+        let items = this.state.items;
+        items.map(item=>{
+            if(item.key===key)
+            item.text=text
+        })
+        this.setState({
+            items: items
+        })
+    }
     render(){
         return(
 
@@ -56,7 +81,10 @@ import TodoItem from "./TodoItem"
                         <button type="submit">Add</button>
 
                     </form>
-                    <TodoItem items= {this.state.items}/>
+                    <TodoItem items= {this.state.items}
+                        deleteItem ={this.deleteItem} 
+                        updateItem = {this.updateItem}
+                    />
                  </header>
             </div>
         )
